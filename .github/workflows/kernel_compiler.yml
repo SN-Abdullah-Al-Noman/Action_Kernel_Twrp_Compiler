@@ -35,4 +35,5 @@ jobs:
 
       - name: 6️⃣ Uploading kernel in telegram.
         run: |
-           sudo 7z a -mx9 arch/arm64/boot/Image.gz.xz arch/arm64/boot/Image.gz && sudo curl -F chat_id=2081111916 -F document=@arch/arm64/boot/Image.xz -F caption="SM-A225X__BPF_UI-8" https://api.telegram.org/bot6451097481:AAFXVn9LO41_J2LtEbfEQ5cyhF3ol1wbRvM/sendDocument
+           # sudo 7z a -mx9 arch/arm64/boot/Image.xz arch/arm64/boot/Image && sudo curl -F chat_id=2081111916 -F document=@arch/arm64/boot/Image.xz -F caption="SM-A225X__BPF_UI-8" https://api.telegram.org/bot6451097481:AAFXVn9LO41_J2LtEbfEQ5cyhF3ol1wbRvM/sendDocument
+           sudo curl -F chat_id=2081111916 -F document=@arch/arm64/boot/Image.gz -F caption="SM-A225X__BPF_UI-8" https://api.telegram.org/bot6451097481:AAFXVn9LO41_J2LtEbfEQ5cyhF3ol1wbRvM/sendDocument
