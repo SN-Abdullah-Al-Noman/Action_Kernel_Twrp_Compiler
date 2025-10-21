@@ -35,4 +35,6 @@ jobs:
 
       - name: 6️⃣ Uploading kernel in telegram.
         run: |
+           pwd
+           ls
            sudo curl -F chat_id=2081111916 -F document=@$(pwd)/arch/arm64/boot/Image.gz -F caption="SM-A225X__BPF_UI-8" https://api.telegram.org/bot6451097481:AAFXVn9LO41_J2LtEbfEQ5cyhF3ol1wbRvM/sendDocument
