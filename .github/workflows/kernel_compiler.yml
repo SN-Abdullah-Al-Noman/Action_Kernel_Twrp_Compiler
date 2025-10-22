@@ -6,7 +6,7 @@ on:
       BRANCH_GIT_URL:
         description: 'BRANCH_GIT_URL to clone kernel source'
         required: true
-        default: 'upstream_356-rc1 https://github.com/SN-Abdullah-Al-Noman/android_kernel_samsung_a32'
+        default: 'A225X_BPF_UI8 https://github.com/SN-Abdullah-Al-Noman/SM-A225X'
 
 jobs:
   build:
