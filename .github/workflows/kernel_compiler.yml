@@ -22,7 +22,7 @@ jobs:
           
       - name: 3️⃣ Cloning kernel source.
         run: |
-          sudo git clone -b "${{ github.event.inputs.BRANCH_GIT_URL }}"
+          sudo git clone -b "${{ github.event.inputs.BRANCH_GIT_URL }}" kernel_source
 
       - name: 4️⃣ Cloning toolchain.
         run: |
