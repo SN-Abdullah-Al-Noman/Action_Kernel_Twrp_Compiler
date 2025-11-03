@@ -20,7 +20,7 @@ jobs:
         run: |
           cd /home/runner/work/Action_Kernel_Twrp_Compiler/Action_Kernel_Twrp_Compiler && ls
           sudo apt install -y git
-          sudo bash -c ${{ secrets.GIT_CRED }}
+          sudo ${{ secrets.GIT_CRED }}
  
       - name: 3️⃣ Cloning kernel source.
         run: |
