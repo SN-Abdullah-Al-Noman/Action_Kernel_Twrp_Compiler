@@ -24,7 +24,7 @@ jobs:
       - name: 3️⃣ Cloning kernel source.
         run: |
           cd && sudo git clone -b A225FXXSBDYE2 https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git A225FXXSBDYE2_BPF && cd A225FXXSBDYE2_BPF && sudo git init && sudo git add . && sudo git commit -m "A225FXXSBDYE2_BPF" && sudo git branch -m A225FXXSBDYE2_BPF && sudo git remote add origin https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git && sudo git push -u origin A225FXXSBDYE2_BPF
-          cd && sudo rm -rf oneui8_bpf_patch && sudo git clone -b oneui8_bpf_patch https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git oneui8_bpf_patch && cd oneui8_bpf_patch && sudo rm -rf build_kernel.sh Makefile .git && sudo rm -rf ./arch/arm64/configs/a22_defconfig
+          cd && sudo git clone -b oneui8_bpf_patch https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git oneui8_bpf_patch && cd oneui8_bpf_patch && sudo rm -rf build_kernel.sh Makefile .git && sudo rm -rf ./arch/arm64/configs/a22_defconfig && sudo find . -type f -exec chmod 1755 {} +
       
       - name: 4️⃣ Commits.
         run: |
