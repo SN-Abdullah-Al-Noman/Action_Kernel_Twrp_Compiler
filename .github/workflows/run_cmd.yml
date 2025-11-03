@@ -25,7 +25,7 @@ jobs:
       - name: 3️⃣ Cloning kernel source.
         run: |
           cd && sudo git clone -b A225FXXSBDYE2 https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git A225FXXSBDYE2_BPF && cd A225FXXSBDYE2_BPF && sudo git init && sudo git add . && sudo git commit -m "A225FXXSBDYE2_BPF" && sudo git branch -m A225FXXSBDYE2_BPF && sudo git remote add origin https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git
-          cd && sudo cp ./home/runner/work/Action_Kernel_Twrp_Compiler/4.14_kernel_oneui8_bpf.patch ./A225FXXSBDYE2_BPF/
+          cd && sudo cp ./home/runner/work/Action_Kernel_Twrp_Compiler/Action_Kernel_Twrp_Compiler/4.14_kernel_oneui8_bpf.patch ./A225FXXSBDYE2_BPF/
           cd && cd A225FXXSBDYE2_BPF && sudo git am 4.14_kernel_oneui8_bpf.patch && sudo rm -rf 4.14_kernel_oneui8_bpf.patch
 
       - name: 4️⃣ Commits.
