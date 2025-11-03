@@ -24,11 +24,9 @@ jobs:
       - name: 3️⃣ Cloning kernel source.
         run: |
           cd && sudo git clone -b A225FXXSBDYE2 https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git A225FXXSBDYE2_BPF && cd A225FXXSBDYE2_BPF && sudo git init && sudo git add . && sudo git commit -m "A225FXXSBDYE2_BPF" && sudo git branch -m A225FXXSBDYE2_BPF
-          cd && sudo git clone -b oneui8_bpf_patch https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git oneui8_bpf_patch && cd oneui8_bpf_patch && sudo rm -rf build_kernel.sh Makefile .git && sudo rm -rf ./arch/arm64/configs/a22_defconfig && sudo find . -type f -exec chmod 1755 {} +
-      
+          
       - name: 4️⃣ Commits.
         run: |
-          cd && sudo cp -a --preserve=all ./oneui8_bpf_patch/* ./A225FXXSBDYE2_BPF/
-          cd && cd A225FXXSBDYE2_BPF && sudo git add . && sudo git commit -m "oneui8_bpf_patch"
-          cd && cd A225FXXSBDYE2_BPF && sudo git format-patch -1 HEAD
-          cd && cd A225FXXSBDYE2_BPF && pwd && ls && sudo curl -F chat_id=2081111916 -F document=@0001-oneui8_bpf_patch.patch -F caption="SM-A225X__BPF_UI-8" https://api.telegram.org/bot6451097481:AAFXVn9LO41_J2LtEbfEQ5cyhF3ol1wbRvM/sendDocument
+          cd && ls && pwd
+          cd && cd A225FXXSBDYE2_BPF
+          
