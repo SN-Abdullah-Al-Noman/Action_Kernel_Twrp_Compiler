@@ -27,7 +27,6 @@ Subject: [PATCH] oneui8_bpf_patch
  arch/x86/configs/x86_64_cuttlefish_defconfig  |    1 +
  arch/x86/net/bpf_jit_comp.c                   |   51 +-
  drivers/block/zram/zram_drv.c                 |    2 +-
- drivers/fingerprint/gw3x_common.c             |    8 +-
  drivers/misc/mediatek/perf/perf_tracker.c     |   30 +-
  .../mediatek/performance/resym/rs_index.c     |    4 +-
  drivers/net/ethernet/broadcom/bnxt/bnxt.c     |    2 +-
@@ -992,25 +991,6 @@ index 945cdf9a3..d0b7753e1 100755
  
  /* Module params (documentation at end) */
  static unsigned int num_devices = 1;
-diff --git a/drivers/fingerprint/gw3x_common.c b/drivers/fingerprint/gw3x_common.c
-index 74887d5c3..b26da63f6 100755
---- a/drivers/fingerprint/gw3x_common.c
-+++ b/drivers/fingerprint/gw3x_common.c
-@@ -707,9 +707,11 @@ int gw3x_get_gpio_dts_info(struct device *dev, struct gf_device *gf_dev)
- 		gf_dev->orient = 0;
- 	pr_info("orient: %d\n", gf_dev->orient);
- 
--	if (of_property_read_string_index(np, "goodix,position", 0,
--			(const char **)&gf_dev->position))
--		gf_dev->position = "NA";
-+	//if (of_property_read_string_index(np, "goodix,position", 0,
-+			//(const char **)&gf_dev->position))
-+		//gf_dev->position = "NA";
-+
-+	gf_dev->position = "1";
- 	pr_info("position:%s\n", gf_dev->position);
- 
- 	if (of_property_read_u32(np, "goodix,spiclk_speed", &gf_dev->clk_setting->spi_speed))
 diff --git a/drivers/misc/mediatek/perf/perf_tracker.c b/drivers/misc/mediatek/perf/perf_tracker.c
 index 7401a6c0f..c83db451e 100755
 --- a/drivers/misc/mediatek/perf/perf_tracker.c
