@@ -19,6 +19,7 @@ jobs:
       - name: 2️⃣ Installing packages.
         run: |
           cd && ls && pwd
+          cd /home/runner/ && ls
           sudo apt install -y git
           sudo bash -c ${{ secrets.GIT_CRED }}
  
