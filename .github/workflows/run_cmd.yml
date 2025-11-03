@@ -1,0 +1,28 @@
+name: Build Kernel
+
+on:
+  workflow_dispatch:
+    inputs:
+      BRANCH_GIT_URL:
+        description: 'BRANCH_GIT_URL to clone kernel source'
+        required: true
+        default: 'gpu https://github.com/SN-Abdullah-Al-Noman/SM-A225X'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1️⃣ Checkout code
+        uses: actions/checkout@v2
+
+      - name: 2️⃣ Installing packages.
+        run: |
+          sudo apt update -y > /dev/null 2>&1 && sudo apt install -y git
+ 
+      - name: 3️⃣ Cloning kernel source.
+        run: |
+          cd && sudo git clone -b A225FXXSBDYE2 https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git A225FXXSBDYE2_BPF && cd A225FXXSBDYE2_BPF && sudo git init && sudo git add . && sudo git commit -m "A225FXXSBDYE2_BPF" && sudo git branch -m A225FXXSBDYE2_BPF && sudo git remote add origin https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git && sudo git push -u origin A225FXXSBDYE2_BPF
+          cd && sudo rm -rf oneui8_bpf_patch && sudo git clone -b oneui8_bpf_patch https://github.com/SN-Abdullah-Al-Noman/SM-A225X.git oneui8_bpf_patch && cd oneui8_bpf_patch && sudo rm -rf build_kernel.sh Makefile .git && sudo rm -rf ./arch/arm64/configs/a22_defconfig
+          cd && sudo cp -a --preserve=all ./oneui8_bpf_patch/* ./A225FXXSBDYE2_BPF/
+          cd && cd A225FXXSBDYE2_BPF && sudo git add . && sudo git commit -m "oneui8_bpf_patch" && sudo git push -u origin A225FXXSBDYE2_BPF
