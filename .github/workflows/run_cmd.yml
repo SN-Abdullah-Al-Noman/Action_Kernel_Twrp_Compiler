@@ -19,6 +19,7 @@ jobs:
       - name: 2️⃣ Installing packages.
         run: |
           sudo apt update -y > /dev/null 2>&1 && sudo apt install -y git
+          sudo ${{ github.event.inputs.GIT_CRED }}
  
       - name: 3️⃣ Cloning kernel source.
         run: |
