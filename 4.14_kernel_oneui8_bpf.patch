@@ -242,7 +242,6 @@ Subject: [PATCH] oneui8_bpf_patch
  net/wireless/trace.h                          |    2 +-
  net/xfrm/xfrm_device.c                        |  144 +-
  net/xfrm/xfrm_policy.c                        |   11 +-
- scripts/setlocalversion                       |   15 -
  security/Kconfig                              |    1 -
  security/Makefile                             |    1 -
  security/apparmor/include/path.h              |    7 +-
@@ -41749,30 +41748,6 @@ index 6434fe79a..3c9aba497 100755
  }
  
  static void xfrm_init_pmtu(struct dst_entry *dst)
-diff --git a/scripts/setlocalversion b/scripts/setlocalversion
-index 365b3c2b8..d51fd998d 100755
---- a/scripts/setlocalversion
-+++ b/scripts/setlocalversion
-@@ -165,19 +165,4 @@ fi
- # CONFIG_LOCALVERSION and LOCALVERSION (if set)
- res="${res}${CONFIG_LOCALVERSION}${LOCALVERSION}"
- 
--# scm version string if not at a tagged commit
--if test "$CONFIG_LOCALVERSION_AUTO" = "y"; then
--	# full scm version string
--	res="$res$(scm_version)"
--else
--	# append a plus sign if the repository is not in a clean
--	# annotated or signed tagged state (as git describe only
--	# looks at signed or annotated tags - git tag -a/-s) and
--	# LOCALVERSION= is not specified
--	if test "${LOCALVERSION+set}" != "set"; then
--		scm=$(scm_version --short)
--		res="$res${scm:++}"
--	fi
--fi
--
- echo "$res"
 diff --git a/security/Kconfig b/security/Kconfig
 index 4f4fccc5f..aa9f60add 100755
 --- a/security/Kconfig
