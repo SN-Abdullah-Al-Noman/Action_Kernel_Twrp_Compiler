@@ -1,4 +1,4 @@
-name: Build Kernel
+name: Run Cmd
 
 on:
   workflow_dispatch:
