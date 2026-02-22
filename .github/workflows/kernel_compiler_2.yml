@@ -21,7 +21,6 @@ jobs:
           sudo apt update -y > /dev/null 2>&1 && sudo apt install -y apt-utils nano bison ca-certificates curl flex gcc git libc6-dev libssl-dev openssl ssh wget zip zstd sudo make clang gcc-arm-linux-gnueabi software-properties-common build-essential libarchive-tools gcc-aarch64-linux-gnu libffi-dev libncurses5-dev zlib1g zlib1g-dev libreadline-dev libbz2-dev libsqlite3-dev pigz python3 cpio lld p7zip-full xz-utils tar libelf-dev libudev-dev libpci-dev libiberty-dev pkg-config llvm clang-tools fakeroot ccache libcap-dev libunwind-dev gawk bc u-boot-tools device-tree-compiler liblzma-dev python3-pip -y > /dev/null 2>&1
           sudo apt install -y nodejs npm
           npm install -g @qwen-code/qwen-code@latest
-          Install
           
       - name: 3️⃣ Cloning kernel source
         run: |
