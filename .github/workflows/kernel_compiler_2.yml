@@ -6,7 +6,7 @@ on:
       BRANCH_GIT_URL:
         description: 'BRANCH_GIT_URL to clone kernel source'
         required: true
-        default: 'A225FXXSBDYE2 https://github.com/SN-Abdullah-Al-Noman/SM-A225X'
+        default: 'A225FXXSBDYE1_5.4_BPF https://github.com/SN-Abdullah-Al-Noman/SM-A225X'
 
 jobs:
   build:
