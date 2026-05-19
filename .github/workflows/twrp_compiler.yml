@@ -51,7 +51,7 @@ jobs:
           
       - name: 5️⃣ Sync Device Dependencies.
         run: |
-          sudo bash convert.sh device/samsung/a22/twrp.dependencies && sudo repo sync -j$(nproc --all)
+          sudo bash scripts/convert.sh device/samsung/a22/twrp.dependencies && sudo repo sync -j$(nproc --all)
 
       - name: 6️⃣ Building twrp.
         run: |
