@@ -36,7 +36,8 @@ jobs:
 
       - name: 6️⃣ Uploading kernel in telegram.
         run: |
-           sudo curl \
+          cd kernel_source/arch/arm64/boot
+          sudo curl \
               -F chat_id=2081111916 \
               -F document=@Image \
               -F caption="${{ github.event.inputs.GITHUB_URL }}" \
