@@ -3,10 +3,10 @@ name: Build Kernel
 on:
   workflow_dispatch:
     inputs:
-      BRANCH_GIT_URL:
-        description: 'BRANCH_GIT_URL to clone kernel source'
+      GITHUB_URL:
+        description: 'GIT_URL to clone kernel source'
         required: true
-        default: 'A528BXXSBGYI3 https://github.com/SN-Abdullah-Al-Noman/SM-A528B'
+        default: '-b A528BXXSBGYI3 https://github.com/SN-Abdullah-Al-Noman/SM-A528B'
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
           
       - name: 3️⃣ Cloning kernel source.
         run: |
-          sudo git clone -b ${{ github.event.inputs.BRANCH_GIT_URL }} kernel_source
+          sudo git clone ${{ github.event.inputs.GITHUB_URL }} kernel_source
 
       - name: 4️⃣ Cloning toolchain.
         run: |
