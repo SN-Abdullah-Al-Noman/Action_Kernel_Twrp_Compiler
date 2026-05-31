@@ -28,7 +28,7 @@ jobs:
         run: |
           sudo git clone https://github.com/SN-Abdullah-Al-Noman/clang-r383902
           sudo git clone https://github.com/SN-Abdullah-Al-Noman/aarch64-linux-android-4.9
-          sudo git clone -b 10.0 https://github.com/SN-Abdullah-Al-Noman/llvm-arm-toolchain-ship
+          sudo git clone -b 10.0 https://github.com/SN-Abdullah-Al-Noman/llvm-arm-toolchain-ship llvm-arm-toolchain-ship/10.0
           
       - name: 5️⃣ Starting kernel compile.
         run: |
