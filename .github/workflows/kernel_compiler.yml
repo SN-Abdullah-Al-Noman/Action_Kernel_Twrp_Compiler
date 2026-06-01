@@ -39,7 +39,7 @@ jobs:
         run: |
           cd kernel_source/arch/arm64/boot
           sudo curl \
-              -F chat_id=2081111916 \
-              -F document=@Image \
-              -F caption="${{ github.event.inputs.GITHUB_URL }}" \
-              "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendDocument
+              -F "chat_id=2081111916" \
+              -F "document=@Image" \
+              -F "caption=${{ github.event.inputs.GITHUB_URL }}" \
+              "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendDocument"
