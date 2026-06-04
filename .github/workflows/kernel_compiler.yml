@@ -18,8 +18,19 @@ jobs:
 
       - name: 2️⃣ Installing packages.
         run: |
-          sudo apt update -y && sudo apt install -y apt-utils nano bison ca-certificates curl flex gcc git libc6-dev libssl-dev openssl ssh wget zip zstd sudo make clang gcc-arm-linux-gnueabi software-properties-common build-essential libarchive-tools gcc-aarch64-linux-gnu libffi-dev libncurses5-dev zlib1g zlib1g-dev libreadline-dev libbz2-dev libsqlite3-dev pigz python3 cpio lld p7zip-full xz-utils tar libelf-dev libudev-dev libpci-dev libiberty-dev pkg-config llvm clang-tools fakeroot ccache libcap-dev libunwind-dev gawk bc u-boot-tools device-tree-compiler liblzma-dev libncursesw5-dev python3-pip libtinfo5 libncurses5
-          
+          sudo apt update -y && sudo apt install -y \
+              apt-utils nano bison ca-certificates curl flex gcc git libc6-dev libssl-dev \
+              openssl ssh wget zip zstd sudo make clang gcc-arm-linux-gnueabi \
+              software-properties-common build-essential libarchive-tools \
+              gcc-aarch64-linux-gnu libffi-dev libncurses5-dev zlib1g zlib1g-dev \
+              libreadline-dev libbz2-dev libsqlite3-dev pigz python3 cpio lld \
+              p7zip-full xz-utils tar libelf-dev libudev-dev libpci-dev \
+              libiberty-dev pkg-config llvm clang-tools fakeroot ccache \
+              libcap-dev libunwind-dev gawk bc u-boot-tools device-tree-compiler \
+              liblzma-dev libncursesw5-dev python3-pip git-core gnupg \
+              libc6-dev-i386 x11proto-core-dev libx11-dev lib32z1-dev \
+              libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig libtinfo5
+
       - name: 3️⃣ Cloning kernel source.
         run: |
           sudo git clone ${{ github.event.inputs.GITHUB_URL }} kernel_source
