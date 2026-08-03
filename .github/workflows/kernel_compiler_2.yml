@@ -3,7 +3,7 @@ name: Build Kernel 2
 on:
   workflow_dispatch:
     inputs:
-      BRANCH_GIT_URL:
+      GITHUB_URL:
         description: 'BRANCH_GIT_URL to clone kernel source'
         required: true
         default: '-b A315FXXS5DXB1 https://github.com/SN-Abdullah-Al-Noman/SM-A315F'
