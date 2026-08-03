@@ -6,7 +6,7 @@ on:
       BRANCH_GIT_URL:
         description: 'BRANCH_GIT_URL to clone kernel source'
         required: true
-        default: 'BPF_UNPRIV https://github.com/SN-Abdullah-Al-Noman/SM-A225X'
+        default: '-b A315FXXS5DXB1 https://github.com/SN-Abdullah-Al-Noman/SM-A315F'
 
 jobs:
   build:
