@@ -6,7 +6,7 @@ on:
       GITHUB_URL:
         description: 'BRANCH_GIT_URL to clone kernel source'
         required: true
-        default: '-b A315FXXS5DXB1 https://github.com/SN-Abdullah-Al-Noman/SM-A315F'
+        default: '-b A415FXXU8DXJ1 https://github.com/SN-Abdullah-Al-Noman/SM-A415F'
 
 jobs:
   build:
