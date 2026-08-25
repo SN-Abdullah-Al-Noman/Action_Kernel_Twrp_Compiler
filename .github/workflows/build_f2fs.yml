@@ -1,58 +1,130 @@
-name: Build sload_f2fs
+name: Build parse.f2fs
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04-arm
+    runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Install dependencies
         run: |
-          sudo apt update
-          sudo apt install -y \
-            git \
+          sudo apt-get update
+          sudo apt-get install -y \
             autoconf \
             automake \
             libtool \
             pkg-config \
-            libselinux1-dev \
-            liblz4-dev \
-            libzstd-dev \
-            uuid-dev
+            make \
+            gcc \
+            g++ \
+            cmake \
+            ninja-build \
+            file
 
-      - name: Clone f2fs-tools
+      - name: Install Android NDK
         run: |
-          git clone https://android.googlesource.com/platform/external/f2fs-tools.git
-          cd f2fs-tools
+          mkdir -p "$HOME/android-sdk/cmdline-tools"
 
-      - name: Configure
-        working-directory: f2fs-tools
+          wget -q \
+            https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip \
+            -O /tmp/cmdline-tools.zip
+
+          unzip -q /tmp/cmdline-tools.zip \
+            -d "$HOME/android-sdk/cmdline-tools"
+
+          mkdir -p "$HOME/android-sdk/cmdline-tools/latest"
+
+          mv "$HOME/android-sdk/cmdline-tools/cmdline-tools/"* \
+            "$HOME/android-sdk/cmdline-tools/latest/"
+
+          export ANDROID_SDK_ROOT="$HOME/android-sdk"
+
+          yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" \
+            --licenses >/dev/null || true
+
+          "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" \
+            "platform-tools" \
+            "ndk;27.0.12077973"
+
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+          echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/27.0.12077973" >> "$GITHUB_ENV"
+
+      - name: Build dependencies
+        run: |
+          export PATH="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH"
+
+          export CC="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang"
+          export AR="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar"
+          export RANLIB="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib"
+          export STRIP="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip"
+
+          echo "CC=$CC"
+          "$CC" --version
+
+      - name: Configure f2fs-tools
         run: |
           ./autogen.sh
-          ./configure
 
-      - name: Build
-        working-directory: f2fs-tools
+      - name: Build parse.f2fs
         run: |
+          export PATH="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH"
+
+          export CC="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang"
+          export AR="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar"
+          export RANLIB="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib"
+
+          ./configure \
+            --host=aarch64-linux-android \
+            --disable-shared \
+            --enable-static
+
           make -j"$(nproc)"
-          pwd
-          cd tools
-          ls
 
       - name: Find parse.f2fs
-        working-directory: f2fs-tools
         run: |
-          find . -type f \( \
-            -name 'parse.f2fs' -o \
-            -name 'parse_f2fs' \
-          \) -exec file {} \;
+          echo "Searching for parse.f2fs..."
+          find . -type f -name "parse.f2fs" -exec file {} \;
 
-      - name: Upload parse_f2fs
+      - name: Verify Android ELF
+        run: |
+          PARSE="$(find . -type f -name parse.f2fs | head -n 1)"
+
+          if [ -z "$PARSE" ]; then
+            echo "ERROR: parse.f2fs was not built"
+            exit 1
+          fi
+
+          echo "Binary: $PARSE"
+
+          file "$PARSE"
+
+          echo
+          echo "ELF interpreter:"
+          readelf -l "$PARSE" | grep -i interpreter || true
+
+          echo
+          echo "Needed libraries:"
+          readelf -d "$PARSE" | grep NEEDED || true
+
+      - name: Prepare artifact
+        run: |
+          PARSE="$(find . -type f -name parse.f2fs | head -n 1)"
+
+          mkdir -p artifact
+
+          cp "$PARSE" artifact/parse.f2fs
+
+          chmod 755 artifact/parse.f2fs
+
+          file artifact/parse.f2fs
+
+      - name: Upload parse.f2fs
         uses: actions/upload-artifact@v4
         with:
-          name: sload-f2fs
-          path: |
-            f2fs-tools/**/parse.f2fs
-            f2fs-tools/**/parse_f2fs
+          name: parse-f2fs-android-arm64
+          path: artifact/parse.f2fs
