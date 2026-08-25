@@ -41,18 +41,18 @@ jobs:
           cd tools
           ls
 
-      - name: Find sload
+      - name: Find parse.f2fs
         working-directory: f2fs-tools
         run: |
           find . -type f \( \
-            -name 'sload.f2fs' -o \
-            -name 'sload_f2fs' \
+            -name 'parse.f2fs' -o \
+            -name 'parse_f2fs' \
           \) -exec file {} \;
 
-      - name: Upload sload_f2fs
+      - name: Upload parse_f2fs
         uses: actions/upload-artifact@v4
         with:
           name: sload-f2fs
           path: |
-            f2fs-tools/**/sload.f2fs
-            f2fs-tools/**/sload_f2fs
+            f2fs-tools/**/parse.f2fs
+            f2fs-tools/**/parse_f2fs
