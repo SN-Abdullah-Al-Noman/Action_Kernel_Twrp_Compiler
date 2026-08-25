@@ -1,0 +1,55 @@
+name: Build sload_f2fs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            git \
+            autoconf \
+            automake \
+            libtool \
+            pkg-config \
+            libselinux1-dev \
+            liblz4-dev \
+            libzstd-dev \
+            uuid-dev
+
+      - name: Clone f2fs-tools
+        run: |
+          git clone https://android.googlesource.com/platform/external/f2fs-tools.git
+          cd f2fs-tools
+
+      - name: Configure
+        working-directory: f2fs-tools
+        run: |
+          ./autogen.sh
+          ./configure
+
+      - name: Build
+        working-directory: f2fs-tools
+        run: |
+          make -j"$(nproc)"
+
+      - name: Find sload
+        working-directory: f2fs-tools
+        run: |
+          find . -type f \( \
+            -name 'sload.f2fs' -o \
+            -name 'sload_f2fs' \
+          \) -exec file {} \;
+
+      - name: Upload sload_f2fs
+        uses: actions/upload-artifact@v4
+        with:
+          name: sload-f2fs
+          path: |
+            f2fs-tools/**/sload.f2fs
+            f2fs-tools/**/sload_f2fs
