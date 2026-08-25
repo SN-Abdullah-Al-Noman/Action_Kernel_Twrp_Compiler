@@ -37,6 +37,9 @@ jobs:
         working-directory: f2fs-tools
         run: |
           make -j"$(nproc)"
+          pwd
+          cd tools
+          ls
 
       - name: Find sload
         working-directory: f2fs-tools
