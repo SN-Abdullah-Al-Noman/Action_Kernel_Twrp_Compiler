@@ -28,14 +28,15 @@ jobs:
         run: |
           cd kernel_source
           sudo mkdir -p "$(pwd)/toolchain/build/kernel"
-          sudo git clone --depth=1 -b build-tools https://github.com/SN-Abdullah-Al-Noman/toolchain "$(pwd)/toolchain/build/kernel/build-tools"
+          sudo git clone --depth=1 https://android.googlesource.com/platform/prebuilts/build-tools "$(pwd)/toolchain/build/kernel/build-tools"
 
       - name: 5️⃣ Cloning clang-r450784d
         run: |
           cd kernel_source
-          sudo mkdir -p "$(pwd)/toolchain/clang/host/linux-x86"
-          sudo git clone --depth=1 -b clang-r450784d https://github.com/SN-Abdullah-Al-Noman/toolchain "$(pwd)/toolchain/clang/host/linux-x86/clang-r450784d"
-    
+          sudo mkdir -p "$(pwd)/toolchain/clang/host/linux-x86/clang-r450784d"
+          sudo wget -O "$(pwd)/toolchain/clang/host/linux-x86/clang-r450784d.tar.gz" "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/android13-release/clang-r450784d.tar.gz"
+          sudo tar -xzf "$(pwd)/toolchain/clang/host/linux-x86/clang-r450784d.tar.gz"  -C "$(pwd)/toolchain/clang/host/linux-x86/clang-r450784d"
+
       - name: 6️⃣ Compiling kernel
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
