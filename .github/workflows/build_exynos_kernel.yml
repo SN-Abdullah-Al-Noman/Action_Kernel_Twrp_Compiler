@@ -27,13 +27,13 @@ jobs:
       - name: 4️⃣ Cloning build-tools
         run: |
           cd kernel_source
-          mkdir -p "$(pwd)/toolchain/build/kernel/build-tools"
+          sudo mkdir -p "$(pwd)/toolchain/build/kernel/build-tools"
           sudo git clone --depth=1 -b build-tools https://github.com/SN-Abdullah-Al-Noman/toolchain "$(pwd)/toolchain/build/kernel/build-tools"
 
       - name: 5️⃣ Cloning clang-r450784d
         run: |
           cd kernel_source
-          mkdir -p "$(pwd)/toolchain/clang/host/linux-x86"
+          sudo mkdir -p "$(pwd)/toolchain/clang/host/linux-x86"
           sudo git clone --depth=1 -b clang-r450784d https://github.com/SN-Abdullah-Al-Noman/toolchain "$(pwd)/toolchain/clang/host/linux-x86/clang-r450784d"
     
       - name: 6️⃣ Compiling kernel
