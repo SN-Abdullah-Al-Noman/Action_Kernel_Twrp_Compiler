@@ -1,4 +1,4 @@
-name: Build Kernel 2
+name: Build Exynos Kernel
 
 on:
   workflow_dispatch:
