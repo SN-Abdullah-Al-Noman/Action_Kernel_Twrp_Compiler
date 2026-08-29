@@ -30,7 +30,7 @@ jobs:
           sudo mkdir -p "$(pwd)/toolchain/prebuilts"
           sudo mkdir -p "$(pwd)/toolchain/build/kernel"
 
-          sudo git clone --depth=1 -b android-15.0.0_r0.10 https://android.googlesource.com/kernel/prebuilts/build-tools "$(pwd)/toolchain/prebuilts/kernel-build-tools"
+          sudo git clone --depth=1 -b android-15.0.0_r0.99 https://android.googlesource.com/kernel/prebuilts/build-tools "$(pwd)/toolchain/prebuilts/kernel-build-tools"
           sudo git clone --depth 1 -b android-15.0.0_r0.10 https://android.googlesource.com/kernel/build "$(pwd)/toolchain/build/kernel/build-tools"
 
       - name: 5️⃣ Cloning clang-r450784d
