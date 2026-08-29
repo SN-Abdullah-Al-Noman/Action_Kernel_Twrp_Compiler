@@ -30,7 +30,7 @@ jobs:
           sudo mkdir -p "$(pwd)/toolchain/build/kernel"
           sudo mkdir -p "$(pwd)/toolchain/prebuilts"
 
-          sudo git clone https://android.googlesource.com/kernel/build "$(pwd)/toolchain/build/kernel/build-tools"
+          sudo git clone --depth 1 -b build-tools "$(pwd)/toolchain/build/kernel/build-tools"
           sudo git clone https://android.googlesource.com/kernel/prebuilts/build-tools "$(pwd)/toolchain/prebuilts/kernel-build-tools"
 
       - name: 5️⃣ Cloning clang-r450784d
