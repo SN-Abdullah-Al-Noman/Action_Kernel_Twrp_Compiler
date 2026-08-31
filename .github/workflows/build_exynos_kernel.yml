@@ -28,7 +28,7 @@ jobs:
       - name: 5️⃣ Cloning samsung toolchain
         run: |
           cd kernel_source
-          git clone --depth 1 --single-branch -b clang-r450784d_linux-x86 https://github.com/SN-Abdullah-Al-Noman/samsung-toolchain toolchain
+          sudo git clone --depth 1 --single-branch -b clang-r450784d_linux-x86 https://github.com/SN-Abdullah-Al-Noman/samsung-toolchain toolchain
 
       - name: 6️⃣ Compiling kernel
         env:
