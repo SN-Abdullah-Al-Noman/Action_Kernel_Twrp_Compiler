@@ -1,4 +1,4 @@
-name: Build Kernel 2
+name: Build MTK Kernel 2
 
 on:
   workflow_dispatch:
