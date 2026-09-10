@@ -3,10 +3,15 @@ name: Build Exynos Kernel
 on:
   workflow_dispatch:
     inputs:
-      GITHUB_URL:
-        description: 'BRANCH_GIT_URL to clone kernel source'
+    GITHUB_BRANCH:
+        description: 'Branch of github repo to clone'
         required: true
-        default: '-b A176BXXS2AYI4 https://github.com/SN-Abdullah-Al-Noman/SM-A176B'
+        default: '-b A166BXXS4BYG1'
+      
+      GITHUB_REPO:
+        description: 'Github repo to clone'
+        required: true
+        default: 'https://github.com/SN-Abdullah-Al-Noman/SM-A166B'
 
 jobs:
   build:
@@ -23,7 +28,7 @@ jobs:
 
       - name: 3️⃣ Cloning kernel source
         run: |
-          sudo git clone ${{ github.event.inputs.GITHUB_URL }} kernel_source
+          sudo git clone ${{ github.event.inputs.GITHUB_BRANCH }} ${{ github.event.inputs.GITHUB_REPO }} kernel_source
 
       - name: 5️⃣ Cloning samsung toolchain
         run: |
