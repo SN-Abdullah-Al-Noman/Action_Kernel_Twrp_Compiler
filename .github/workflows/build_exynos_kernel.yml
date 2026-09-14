@@ -53,8 +53,13 @@ jobs:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
         run: |
           cd kernel_source/arch/arm64/boot
+          mv Image boot.img-kernel
+          gzip -c boot.img-kernel > boot.img-kernel.gz
+          rm -f boot.img-kernel
+          mv boot.img-kernel.gz boot.img-kernel
+          
           sudo curl \
               -F "chat_id=2081111916" \
-              -F "document=@Image" \
+              -F "document=@boot.img-kernel" \
               -F "caption=${{ github.event.inputs.GITHUB_URL }}" \
               "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendDocument"
