@@ -54,7 +54,7 @@ jobs:
         run: |
           cd kernel_source/arch/arm64/boot
           sudo mv Image boot.img-kernel
-          sudo gzip -c boot.img-kernel > boot.img-kernel.gz
+          sudo sh -c 'gzip -c boot.img-kernel > boot.img-kernel.gz'
           sudo rm -f boot.img-kernel
           sudo mv boot.img-kernel.gz boot.img-kernel
           
